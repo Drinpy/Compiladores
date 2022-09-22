@@ -13,6 +13,8 @@
      Autômato de pilha = usado em linguagens de programação, inteligência artificial.
    
    ``A teoria dos autômatos fornece o formalismo matemático utilizado nas Teorias de Complexidade e Computabilidade.``
+   
+   ### Grafo
 
 </br>
 
