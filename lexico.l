@@ -20,26 +20,33 @@ inteiro        printf("%11s: reservada\n", yytext);
 logico         printf("%11s: reservada\n", yytext);
 
 
-"+"     printf("%11s: operador\n", yytext);
-"-"     printf("%11s: operador\n", yytext);
-"*"     printf("%11s: operador\n", yytext);
-div     printf("%11s: operador\n", yytext);
-">"     printf("%11s: operador\n", yytext);
-"<"     printf("%11s: operador\n", yytext);
-"="     printf("%11s: operador\n", yytext);
- e      printf("%11s: operador\n", yytext);
- ou     printf("%11s: operador\n", yytext);
- nao    printf("%11s: operador\n", yytext);
-"("     printf("%11s: abre\n", yytext);
-")"     printf("%11s: fecha\n", yytext);
+"+"             printf("%3d>%11s: soma\n", nlin, yytext);
+"-"             printf("%3d>%11s: subtracao\n", nlin, yytext);
+"*"             printf("%3d>%11s: multiplicacao\n", nlin, yytext);
+"<-"            printf("%3d>%11s: atribuicao\n", nlin, yytext);
+"div"           printf("%3d>%11s: divisao\n", nlin, yytext);
+">"             printf("%3d>%11s: maior\n", nlin, yytext);
+"<"             printf("%3d>%11s: menor\n", nlin, yytext);
+"="             printf("%3d>%11s: igual\n", nlin, yytext);
+e               printf("%3d>%11s: e logico\n", nlin, yytext);
+ou              printf("%3d>%11s: ou logico\n", nlin, yytext);
+nao             printf("%3d>%11s: negacao\n", nlin, yytext);
+"("             printf("%3d>%11s: abre\n", nlin, yytext);
+")"             printf("%3d>%11s: fecha\n", nlin, yytext);
 
 "V"     printf("%11s: constante\n", yytext);
 "F"     printf("%11s: constante\n", yytext);
 
-{identificador}     printf("%11s: identificador\n", yytext);
-{numero}            printf("%11s: numero\n", yytext);
+"//".*          ;
+"/*"            BEGIN(coment);
+<coment>"*/"    BEGIN(INITIAL);
+<coment>.       ;
+<coment>\n      nlin++;
+
+{identificador}     printf("%3d|%11s: identificador\n", nlin, yytext);
+{numero}            printf("%3d|%11s: numero\n", nlin, yytext);
 {espaço}            ;
-{novalinha}         ;
+{novalinha}         nlin++;
 
 %%
 int yywrap() { return1; }
